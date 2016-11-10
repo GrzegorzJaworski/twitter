@@ -21,7 +21,7 @@ class Connetion {
         if ($this->connetion->connect_error) {
             die('Blad logowania z baza.' . $this->connetion->connect_error);
         } else {
-            echo('Nawiazano polaczenie z baza');
+            //echo('Nawiazano polaczenie z baza');
             return $this->connetion;
         }
     }

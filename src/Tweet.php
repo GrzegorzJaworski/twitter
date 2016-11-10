@@ -6,11 +6,14 @@ class Tweet {
     private $tweet;
     private $creationDate;
     
+
+
     public function __construct() {
         $this->id = -1;
         $this->userId = "";
         $this->tweet = "";
         $this->creationDate = "";
+        
     }
     
     public function setUserId($userId) {
@@ -62,7 +65,9 @@ class Tweet {
     }
     
     static public function loadAllTweetsByUserId(mysqli $connetion, $userId) {
-        $sql = "SELECT * FROM Tweet WHERE user_id = $userId";
+        $sql = "SELECT * FROM Tweet 
+            WHERE user_id = $userId
+            ORDER BY Tweet.creationDate DESC";
         
         $result = $connetion->query($sql);
         $tweets = [];
@@ -74,7 +79,8 @@ class Tweet {
                 $loadedTweet->userId = $row['user_id'];
                 $loadedTweet->tweet = $row['tweet'];
                 $loadedTweet->creationDate = $row['creationDate'];
-                
+               
+
                 $tweets[] = $loadedTweet;
             }
             return $tweets;
@@ -82,7 +88,8 @@ class Tweet {
     }
     
     static public function loadAllTweets(mysqli $connetion) {
-        $sql = "SELECT * FROM Tweet";
+        $sql = "SELECT * FROM Tweet ORDER BY Tweet.creationDate DESC";
+            
         
         $result = $connetion->query($sql);
         $tweets = [];
@@ -94,6 +101,7 @@ class Tweet {
                 $loadedTweet->userId = $row['user_id'];
                 $loadedTweet->tweet = $row['tweet'];
                 $loadedTweet->creationDate = $row['creationDate'];
+               // $loadedTweet->usernam =$row['username'];
                 
                 $tweets[] = $loadedTweet;
             }

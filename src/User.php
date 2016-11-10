@@ -53,7 +53,7 @@ class User {
                 $this->id = $connetion->insert_id;
                 return true;
             } else {
-                echo($connetion->error);
+                return false;
             }
         } else {
             $sql = "UPDATE Users SET 
@@ -116,8 +116,9 @@ class User {
     }
     
     public function delete(mysqli $connetion) {
-        if ($this->id != 1) {
-            $sql = "DELETE FROM Users WHERE id=$this->id";
+        if ($this->id != -1) {
+            
+            $sql = "DELETE FROM `Users` WHERE `id`=$this->id";
             $result = $connetion->query($sql);
             
             if ($result) {
@@ -125,6 +126,7 @@ class User {
                 echo('Uzytkownik skasowany');
                 return true;
             } else {
+                $connetion->error;
                 return false;
             }
         }
@@ -132,5 +134,6 @@ class User {
     }
 
 }
+
 ?>
 
